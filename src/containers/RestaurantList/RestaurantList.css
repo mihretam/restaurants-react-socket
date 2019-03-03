@@ -1,0 +1,20 @@
+.restaurantList {
+    width: 20%;
+    height: 100%;
+    background-color: #eee;
+    border: 1px solid #4440B9;
+    margin: 10px;
+}
+
+.restaurantList ol {
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+}
+
+.restaurantList ol li {
+    text-align: left;
+    font-size: 25px;
+    margin: 7px 0px;
+    padding: 7px 0px;
+}

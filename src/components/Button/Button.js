@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import './Button.css';
 
-let styles = {
+const styles = {
     root: {
         height: 10,
         float: 'right',
@@ -15,9 +15,9 @@ let styles = {
 
 const Button = (props) => {
     const { classes, children, className, ...other } = props;
-    let variant = "round";
+
     return (
-        <Fab size="small" className={classNames(classes.root, className)} variant={variant} {...other} >
+        <Fab size="small" mini className={classNames(classes.root, className)}  {...other} >
             <AddIcon />
         </Fab>
     );

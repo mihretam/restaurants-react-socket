@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RestaurantListItem from '../../components/RestaurantListItem/RestaurantListItem';
-import Button from '@material-ui/core/Button';
+import NewRestaurantButton from '../../components/Button/NewRestaurantButton/NewRestaurantButton';
+import List from '@material-ui/core/List';
 import './RestaurantList.css'
 
 class RestaurantList extends Component {
@@ -18,17 +19,20 @@ class RestaurantList extends Component {
     }
 
     newRestaurantHandler = () => {
-
+        const updatedListOfRestaurants = [...this.state.listOfRestaurants];
+        updatedListOfRestaurants.push("Restaurant");
+        this.setState({ listOfRestaurants: updatedListOfRestaurants });
+        console.log(this.state);
     }
 
     render() {
         let listOfRestaurants = this.state.listOfRestaurants.map(restaurantName => <RestaurantListItem key={restaurantName} restaurantName={restaurantName} />)
         return (
             <div className="restaurantList">
-                <ol>
+                <List component="ol">
                     {listOfRestaurants}
-                </ol>
-                <Button variant="contained" > Add  </Button>
+                </List>
+                <NewRestaurantButton clicked={this.newRestaurantHandler} />
             </div>
 
         );

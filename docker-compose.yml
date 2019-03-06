@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    build: ./client
+    ports:
+    - "80:80"
+    links:
+    - node
+    volumes:
+    - ./client/dist:/usr/share/nginx/html"
+  node:
+    build: ./server
+    env_file:
+    - ./server/.env.example
+    ports:
+    - "3001:3001"
+    links:
+    - mongo
+  mongo:
+    image: mongo
+    ports:
+    - "27017:27017"

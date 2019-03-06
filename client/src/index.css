@@ -1,0 +1,355 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', 'Arial', sans-serif !important;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+html,
+body,
+#root,
+#root > div {
+  height: 100%;
+  color: rgba(0, 0, 0, 0.87);
+}
+.full-width {
+  width: 100% !important;
+}
+
+.full-height {
+  height: 100% !important;
+}
+
+.container-full {
+  width: 100% !important;
+  height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+.align-center-full {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.align-center-horizontal {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.align-center-vertical {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.align-left {
+  display: flex !important;
+  justify-content: flex-start !important;
+}
+
+.align-right {
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+
+.padding-full-standard {
+  padding: 16px !important;
+}
+
+.padding-full-half {
+  padding: 8px !important;
+}
+
+.padding-side-half {
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+.padding-side-standard {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
+.padding-vertical-half {
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+}
+
+.padding-vertical-standard {
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.margin-full-standard {
+  margin: 16px !important;
+}
+
+.margin-full-double {
+  margin: 32px !important;
+}
+
+.margin-full-triple {
+  margin: 48px !important;
+}
+
+.margin-side-half {
+  margin-left: 8px !important;
+  margin-right: 8px !important;
+}
+
+.margin-side-standard {
+  margin-left: 16px !important;
+  margin-right: 16px !important;
+}
+
+.margin-side-double {
+  margin-left: 32px !important;
+  margin-right: 32px !important;
+}
+
+.margin-side-triple {
+  margin-left: 48px !important;
+  margin-right: 48px !important;
+}
+
+.margin-vertical-half {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+
+.margin-vertical-standard {
+  margin-top: 16px !important;
+  margin-bottom: 16px !important;
+}
+
+.margin-vertical-double {
+  margin-top: 32px !important;
+  margin-bottom: 32px !important;
+}
+
+.margin-vertical-triple {
+  margin-top: 48px !important;
+  margin-bottom: 48px !important;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-filler {
+  flex: 1;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.transparent {
+  background: rgba(0, 0, 0, 0) !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* EDGE CASES */
+
+/* Refresh icon animation */
+
+.refresh-icon-rotate {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Refresh container animation */
+
+.refresh-container {
+  animation: flash 1s linear 1;
+}
+
+@keyframes flash {
+  from {
+    background-color: #8fa4ae;
+  }
+  to {
+    background-color: white;
+  }
+}
+
+/* Data dialog error message */
+
+/*.data-dialog-actions > div:first-child {*/
+/*width: 100%;*/
+/*}*/
+
+/* Tooltip for D3 Charts */
+
+.chart-tooltip-default {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 0;
+  color: white;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+/* ChipInput Component - Edge case handling (Temporary solution) */
+
+.ChipInput-inkbar-195:after {
+  background-color: #8ea4ae !important;
+}
+
+/* LED Lights */
+
+.led-light {
+  display: inline-block;
+  margin-right: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.led-light-red {
+  background-color: #b91900;
+  box-shadow: rgba(0,0,0,0.1) 0 -1px 4px 1px, inset #460 0 -1px 5px, #460  0 2px 5px;
+}
+
+.led-light-yellow {
+  background-color: #A90;
+  box-shadow: rgba(0,0,0,0.1) 0 -1px 4px 1px, inset #460 0 -1px 5px, #460  0 2px 5px;
+}
+
+.led-light-green {
+  background-color: #690;
+  box-shadow: rgba(0,0,0,0.1) 0 -1px 4px 1px, inset #460 0 -1px 5px, #460  0 2px 5px;
+}
+
+/* Loading dots animation */
+
+@keyframes blink {
+  /**
+   * At the start of the animation the dot
+   * has an opacity of .2
+   */
+  0% {
+    opacity: .2;
+  }
+  /**
+   * At 20% the dot is fully visible and
+   * then fades out slowly
+   */
+  20% {
+    opacity: 1;
+  }
+  /**
+   * Until it reaches an opacity of .2 and
+   * the animation can start again
+   */
+  100% {
+    opacity: .2;
+  }
+}
+
+.loading-dots-animation span {
+  /**
+   * Use the blink animation, which is defined above
+   */
+  animation-name: blink;
+  /**
+   * The animation should take 1.4 seconds
+   */
+  animation-duration: 1.4s;
+  /**
+   * It will repeat itself forever
+   */
+  animation-iteration-count: infinite;
+  /**
+   * This makes sure that the starting style (opacity: .2)
+   * of the animation is applied before the animation starts.
+   * Otherwise we would see a short flash or would have
+   * to set the default styling of the dots to the same
+   * as the animation. Same applies for the ending styles.
+   */
+  animation-fill-mode: both;
+}
+
+.loading-dots-animation span:nth-child(2) {
+  /**
+   * Starts the animation of the third dot
+   * with a delay of .2s, otherwise all dots
+   * would animate at the same time
+   */
+  animation-delay: .2s;
+}
+
+.loading-dots-animation span:nth-child(3) {
+  /**
+   * Starts the animation of the third dot
+   * with a delay of .4s, otherwise all dots
+   * would animate at the same time
+   */
+  animation-delay: .4s;
+}
+
+.fixed-scroll-bar::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.fixed-scroll-bar::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+
+.fixed-scroll-bar::-webkit-scrollbar:horizontal {
+  height: 11px;
+}
+
+.fixed-scroll-bar::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white; /* should match background, can't be transparent */
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.fixed-scroll-bar::-webkit-scrollbar-track {
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+/* Table Simple row hover */
+
+.table-simple-row:hover {
+  background: rgba(94, 162, 245, 0.12);
+}

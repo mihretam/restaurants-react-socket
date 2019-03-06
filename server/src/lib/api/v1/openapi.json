@@ -1,0 +1,297 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Serapion Server API",
+    "description" : "This is a Serapion Server backend API with implemented endpoints",
+    "contact" : {
+      "email" : "info@serapion.net"
+    },
+    "version" : "1.0.0"
+  },
+  "servers" : [{
+    "url" : "http://localhost:3001/api/v1",
+    "description" : "Local development Server"
+  }, {
+    "url" : "https://virtserver.swaggerhub.com/Serapion/BMF/1.0.0",
+    "description" : "SwaggerHub API Auto Mocking"
+  } ],
+  "tags" : [ {
+    "name" : "Public",
+    "description" : "Public calls"
+  }, {
+    "name" : "Brand",
+    "description" : "Operations available only to a user registered as Brand"
+  }, {
+    "name" : "Influencer",
+    "description" : "Operations available only to a user registered as Influencer"
+  }, {
+    "name" : "Admin",
+    "description" : "Operations available only to a user registered as Application Admin"
+  } ],
+  "paths" : {
+    "/register" : {
+      "post" : {
+        "tags" : [ "Public" ],
+        "summary" : "Registers a new user",
+        "description" : "Adds a new user to the system",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/userRegister"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "User created"
+          },
+          "400" : {
+            "description" : "Incomplete data submitted",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "User already exists",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_400"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login" : {
+      "post" : {
+        "tags" : [ "Public" ],
+        "summary" : "Loggs in user",
+        "description" : "User login and obtain token",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/userLogin"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "User logged in",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/loggedUser"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Password incorrect or email not confirmed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_401"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "User does not exist",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_401"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/forgotPassword" : {
+      "post" : {
+        "tags" : [ "Public" ],
+        "summary" : "Forgot password request",
+        "description" : "User to obtain password reset token.",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/passwordRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Please check your email for the link to reset your password."
+          },
+          "422" : {
+            "description" : "Your request could not be processed as entered. Please try again.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_401"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profile" : {
+      "get" : {
+        "tags" : [ "Brand", "Influencer", "Admin" ],
+        "summary" : "user profile data",
+        "description" : "Get current logged in user profile",
+        "responses" : {
+          "200" : {
+            "description" : "User profile data",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/userProfile"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "User not logged in",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/inline_response_401"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "userLogin" : {
+        "required" : [ "email", "password" ],
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          }
+        }
+      },
+      "passwordRequest" : {
+        "required" : [ "email" ],
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          }
+        }
+      },
+      "userProfile" : {
+        "type" : "object",
+        "properties" : {
+          "profile" : {
+            "$ref" : "#/components/schemas/user"
+          }
+        }
+      },
+      "loggedUser" : {
+        "type" : "object",
+        "properties" : {
+          "token" : {
+            "type" : "string"
+          },
+          "user" : {
+            "$ref" : "#/components/schemas/user"
+          }
+        }
+      },
+      "user" : {
+        "type" : "object",
+        "properties" : {
+          "_id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "fullName" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "role" : {
+            "type" : "string"
+          }
+        }
+      },
+      "userRegister" : {
+        "required" : [ "email", "fullName", "password", "role" ],
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "fullName" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          },
+          "role" : {
+            "type" : "string"
+          },
+          "provider" : {
+            "type" : "string"
+          },
+          "providerId" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_401" : {
+        "type" : "object",
+        "properties" : {
+          "error" : {
+            "type" : "string"
+          }
+        }
+      },
+      "inline_response_400" : {
+        "type" : "object",
+        "properties" : {
+          "error" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "bearerAuth" : {
+        "type" : "http",
+        "scheme" : "bearer",
+        "bearerFormat" : "JWT"
+      }
+    }
+  }
+}

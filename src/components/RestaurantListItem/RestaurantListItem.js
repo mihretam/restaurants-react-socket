@@ -1,5 +1,5 @@
-import React from 'react';
-import Button from '../Button/Button';
+import React, { Component } from 'react';
+//import Button from '../Button/Button';
 import { withStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -12,14 +12,25 @@ const styles = {
     }
 }
 
-const RestaurantListItem = (props) => {
-    const { classes } = props;
-    return (
-        <ListItem >
-            <ListItemText primary={props.restaurantName} classes={{ primary: classes.listItemText }} />
-            <Button />
-        </ListItem>
-    );
+class RestaurantListItem extends Component {
+
+    state = {
+        isDisable: false
+    }
+
+    openOrderHandler = () => {
+        this.setState({isDisable: true});
+    }
+
+    render() {
+        const { classes } = this.props;
+
+        return (
+            <ListItem button onClick={this.openOrderHandler} disabled={this.state.isDisable} >
+                <ListItemText primary={this.props.restaurantName} classes={{ primary: classes.listItemText }} />
+            </ListItem>
+        );
+    };
 };
 
 export default withStyles(styles)(RestaurantListItem);

@@ -12,7 +12,7 @@ import RestaurantApp from '../../RestaurantApp';
 
 const routesList = [
   {
-    path: '/app',
+    path: '/restaurants',
     exact: true,
     component: RestaurantApp,
     layoutType: LayoutType.dashboard,
@@ -41,7 +41,7 @@ const routesList = [
   },
   {
     path: '/home',
-    component: RestaurantApp,
+    component: HomeScreen,
     layoutType: LayoutType.dashboard,
     authenticate: true
   },

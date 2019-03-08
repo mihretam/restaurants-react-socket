@@ -12,13 +12,6 @@ import RestaurantApp from '../../RestaurantApp';
 
 const routesList = [
   {
-    path: '/restaurants',
-    exact: true,
-    component: RestaurantApp,
-    layoutType: LayoutType.dashboard,
-    authenticate: true
-  },
-  {
     path: '/',
     exact: true,
     component: LoginScreen,
@@ -51,6 +44,13 @@ const routesList = [
     component: LoginScreen,
     layoutType: LayoutType.empty,
     authenticate: false
+  },
+  {
+    path: '/restaurants',
+    exact: true,
+    component: RestaurantApp,
+    layoutType: LayoutType.dashboard,
+    authenticate: true
   },
   {
     path: '/setting',

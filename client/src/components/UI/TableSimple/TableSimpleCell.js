@@ -48,7 +48,7 @@ class TableSimpleCell extends Component {
     if (key === '2100-01-01') {
       return <TableCell style={this.getCellStyles()}>-</TableCell>;
     } else if (typeof key === 'string' || typeof key === 'number') {
-      if (/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/i.test(keyCell)) {
+      if (/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/i.test(keyCell)) {
         return (
           <TableCell style={this.getCellStyles()} numeric={numeric}>
             {key.substring(8, 10) +

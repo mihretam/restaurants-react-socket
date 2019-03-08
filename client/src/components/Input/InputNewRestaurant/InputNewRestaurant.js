@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
+import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Input from '../Input';
@@ -33,8 +32,7 @@ const InputNewRestaurant = (props) => {
     return (
         <div style={getModalStyle()} className={classes.paper}>
             <Typography variant="h6" id="modal-title">New restaurant name:</Typography>
-            <Input label="Restaurant names" type="" />
-            <Button variant="contained"  className={classes.root} onClick={() => props.clicked(this.state)}>Add </Button>
+            <Input label="Restaurant names" type="" clicked={props.clicked} closeHandler={props.closeHandler}/>
         </div>
     );
 }

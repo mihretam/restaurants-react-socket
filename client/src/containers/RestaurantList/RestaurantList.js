@@ -18,6 +18,10 @@ class RestaurantList extends Component {
         ]
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        console.log(this);
+    }
+
     newRestaurantHandler = (newRestaurant) => {
         const updatedListOfRestaurants = [...this.state.listOfRestaurants];
         updatedListOfRestaurants.push(newRestaurant);

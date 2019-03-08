@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import { withStyles } from '@material-ui/core/styles';
 import InputNewRestaurant from '../../Input/InputNewRestaurant/InputNewRestaurant';
@@ -41,9 +40,10 @@ class AddRestaurantButton extends Component {
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
                     open={this.state.open}
-                    onClose={this.handleClose} >
+                    onClose={this.handleClose}
+                >
 
-                    <InputNewRestaurant onClose={this.handleClose} clicked={this.props.clicked} />
+                    <InputNewRestaurant closeHandler={this.handleClose} clicked={this.props.clicked}  />
                 </Modal>
             </div>
         )

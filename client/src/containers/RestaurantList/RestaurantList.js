@@ -2,50 +2,14 @@ import React, { Component } from 'react';
 import RestaurantListItem from '../../components/RestaurantListItem/RestaurantListItem';
 import NewRestaurantButton from '../../components/Button/NewRestaurantButton/NewRestaurantButton';
 import List from '@material-ui/core/List';
+import data from './RestaurantList.json';
+import axios from 'axios';
 import './RestaurantList.css'
 
 class RestaurantList extends Component {
     state = {
         listOfRestaurants: {
-            "Zlatnik": {
-                orders: [],
-                openWindow: false
-            },
-
-            "Mozaik": {
-                orders: [],
-                openWindow: false
-            },
-
-            "NjamNjam": {
-                orders: [],
-                openWindow: false
-            },
-
-            "Sezam": {
-                orders: [],
-                openWindow: false
-            },
-
-            "Merak": {
-                orders: [],
-                openWindow: false
-            },
-
-            "Limenka": {
-                orders: [],
-                openWindow: false
-            },
-
-            "Old Story": {
-                orders: [],
-                openWindow: false
-            },
-
-            "Bagi": {
-                orders: [],
-                openWindow: false
-            }
+            ...data
         }
     }
 
@@ -67,6 +31,14 @@ class RestaurantList extends Component {
             openWindow: false
         };
         this.setState({ listOfRestaurants: updatedListOfRestaurants });
+    }
+
+    componentDidMount() {
+        axios.get('someURL')
+            .then(request => {
+                const currentListOfRestaurants = request.data;
+                this.setState({listOfRestaurants: currentListOfRestaurants});
+            })
     }
 
     render() {

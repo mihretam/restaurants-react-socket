@@ -169,3 +169,21 @@ export async function emailConfirm(req, res, next) {
     return next(error);
   }
 }
+
+export async function addRestaurant (req, res, next) {
+  console.log("s")
+  //res.json({test: 'aasdas'})
+  var restaurant = {
+    restaurantName: req.body.restaurantName,
+    workingHours: req.body.workingHours,
+    restaurantLink: req.body.restaurantLink
+  };
+  Restaurant.save(restaurant).then( (savedRestaurant) => {
+    res.status(200).send(savedRestaurant._id.toString());
+    next();
+  }).catch( (err) => {
+    res.status(400).send(err);
+   });
+ 
+  
+};

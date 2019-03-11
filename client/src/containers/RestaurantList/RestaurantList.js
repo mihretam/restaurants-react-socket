@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import RestaurantListItem from '../../components/RestaurantListItem/RestaurantListItem';
 import NewRestaurantButton from '../../components/Button/NewRestaurantButton/NewRestaurantButton';
 import List from '@material-ui/core/List';
-import data from './RestaurantList.json';
 import axios from 'axios';
 import './RestaurantList.css'
 
 class RestaurantList extends Component {
     state = {
         listOfRestaurants: {
-            ...data
+            
         }
     }
 

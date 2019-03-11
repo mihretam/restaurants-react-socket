@@ -14,19 +14,11 @@ const styles = {
 
 class RestaurantListItem extends Component {
 
-    state = {
-        isDisable: false
-    }
-
-    openOrderHandler = () => {
-        this.setState({isDisable: true});
-    }
 
     render() {
         const { classes } = this.props;
-
         return (
-            <ListItem button onClick={this.openOrderHandler} disabled={this.state.isDisable} >
+            <ListItem button onClick={this.props.clicked}  >
                 <ListItemText primary={this.props.restaurantName} classes={{ primary: classes.listItemText }} />
             </ListItem>
         );

@@ -2,19 +2,14 @@ import React, { Component } from 'react';
 import RestaurantListItem from '../../components/RestaurantListItem/RestaurantListItem';
 import NewRestaurantButton from '../../components/Button/NewRestaurantButton/NewRestaurantButton';
 import List from '@material-ui/core/List';
-import data from './RestaurantList.json';
-import axios from 'axios';
+import Orders from '../../components/Orders/Orders'
+import axios from '../../services/RestaurantsAxios';
 import './RestaurantList.css'
 
 class RestaurantList extends Component {
     state = {
-        listOfRestaurants: {
-            ...data
-        }
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        console.log(this);
+        listOfRestaurants: [],
+        orders: []
     }
 
     formatName = (newRestaurant) => {
@@ -25,30 +20,44 @@ class RestaurantList extends Component {
         if (newRestaurant === "") {
             return;
         }
-        const updatedListOfRestaurants = {...this.state.listOfRestaurants};
-        updatedListOfRestaurants[newRestaurant] = {
-            orders: [],
-            openWindow: false
-        };
+        const updatedListOfRestaurants = [...this.state.listOfRestaurants];
+        updatedListOfRestaurants.push({ restaurantId: newRestaurant, restaurantName: this.formatName(newRestaurant) })
         this.setState({ listOfRestaurants: updatedListOfRestaurants });
     }
 
+    newOrderHandler = () => {
+
+        let updatedOrders = [...this.state.orders];
+        updatedOrders.push(updatedOrders.length + 1);
+        console.log(updatedOrders)
+        this.setState({ orders: updatedOrders })
+    }
+
     componentDidMount() {
-        axios.get('someURL')
-            .then(request => {
-                const currentListOfRestaurants = request.data;
-                this.setState({listOfRestaurants: currentListOfRestaurants});
-            })
+         axios.get('/restaurant/list')
+                .then(response => {
+                 const currentListOfRestaurants = response.data;
+                 this.setState({ listOfRestaurants: currentListOfRestaurants });
+             })
     }
 
     render() {
-        let listOfRestaurants = Object.keys(this.state.listOfRestaurants).map(restaurantName => <RestaurantListItem key={restaurantName} restaurantName={restaurantName} />)
+        const listOfRestaurants = this.state.listOfRestaurants.map(restaurant => <RestaurantListItem
+            key={restaurant.restaurantId}
+            restaurantName={restaurant.restaurantName}
+            clicked={this.newOrderHandler} />)
         return (
-            <div className="restaurantList">
-                <List component="ol">
-                    {listOfRestaurants}
-                </List>
-                <NewRestaurantButton clicked={this.newRestaurantHandler} />
+
+            <div className="flex-container">
+                <div className="restaurantList">
+                    <List component="ol">
+                        {listOfRestaurants}
+                    </List>
+                    <NewRestaurantButton clicked={this.newRestaurantHandler} />
+                </div>
+                <div className="orderDisplay">
+                    <Orders listOfOrders={this.state.orders} />
+                </div>
             </div>
 
         );

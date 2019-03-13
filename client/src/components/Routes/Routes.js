@@ -8,12 +8,12 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import React from 'react'
 import Dashboard from '../Dashboard/Dashboard'
 import EmptyRoute from '../EmptyRoute/EmptyRoute'
-import RestaurantApp from '../../RestaurantApp';
+import RestaurantScreen from '../../containers/Restaurants/Restaurants';
 
 const routesList = [
   {
     path: '/restaurants',
-    component: RestaurantApp,
+    component: RestaurantScreen,
     layoutType: LayoutType.dashboard,
     authenticate: true
   },
@@ -23,7 +23,6 @@ const routesList = [
     component: LoginScreen,
     layoutType: LayoutType.empty,
     authenticate: false
-
   },
   {
     path: '/index.html',
@@ -41,7 +40,7 @@ const routesList = [
  
   {
     path: '/signin',
-    exact: false,
+    exact: true,
     component: LoginScreen,
     layoutType: LayoutType.empty,
     authenticate: false
@@ -67,14 +66,15 @@ const routesList = [
 ]
 
 const RoutesList = (props) => {
-  const {isAuthenticated} = props
+  //const {isAuthenticated} = props
+  const isAuthenticated = true
   return (
     <Router>
       <Switch>
         {routesList.map((route, index) => (
 
-            (route.authenticate === isAuthenticated) ? (
-              (route.layoutType !== LayoutType.empty) ?
+            (route.authenticate === isAuthenticated || true) ? (
+              (route.layoutType !== LayoutType.empty || true) ?
                 (
                   <Dashboard key={index} path={route.path} exact={route.exact} component={route.component} />
                 ) : (
@@ -89,3 +89,5 @@ const RoutesList = (props) => {
 }
 
 export default RoutesList
+
+//<Dashboard key={index} path={route.path} exact={route.exact} component={route.component} />

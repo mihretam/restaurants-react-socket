@@ -8,8 +8,10 @@ import './Restaurants.css';
 
 class Restaurants extends Component {
     state = {
-        listOfRestaurants: [],
-        orders: []
+        listOfRestaurants: [
+            {restaurantId: 2, restaurantName: 'asdas'}
+        ],
+        orders: [1, 2]
     }
 
     formatName = (newRestaurant) => {
@@ -34,7 +36,7 @@ class Restaurants extends Component {
     }
 
     componentDidMount() {
-         axios.get('/restaurant/list')
+         axios.get('/restaurants/list')
                 .then(response => {
                  const currentListOfRestaurants = response.data;
                  this.setState({ listOfRestaurants: currentListOfRestaurants });
@@ -42,16 +44,18 @@ class Restaurants extends Component {
     }
 
     render() {
-      
+      const { listOfRestaurants, orders } = this.state
         return (
-
             <div className="flex-container">
                 <div className="restaurantList">
-                   <RestaurantList listOfRestaurants={this.state.listOfRestaurants} openNewOrder={this.newOrderHandler} addNewRestaurant={this.newRestaurantHandler} />
+                   <RestaurantList 
+                        listOfRestaurants={listOfRestaurants} 
+                        openNewOrder={this.newOrderHandler} 
+                   />
                    <NewRestaurantButton addNewRestaurant={this.newRestaurantHandler} /> 
                 </div>
                 <div className="orderDisplay">
-                    <Orders listOfOrders={this.state.orders} />
+                    <Orders listOfOrders={orders} />
                 </div>
             </div>
 

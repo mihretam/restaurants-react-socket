@@ -35,14 +35,23 @@ class AddRestaurantButton extends Component {
         const { classes } = this.props;
         return (
             <div>
-                <Button onClick={this.handleOpen} className={classes.root} variant="contained">Add new restaurant</Button>
+                <Button
+                    onClick={this.handleOpen}
+                    className={classes.root}
+                    variant="contained">
+                    Add new restaurant
+                </Button>
+
                 <Modal
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
                     open={this.state.open}
                     onClose={this.handleClose}
                 >
-                    <InputNewRestaurant closeHandler={this.handleClose} addNewRestaurant={this.props.addNewRestaurant}  />
+                    <InputNewRestaurant
+                        closeHandler={this.handleClose}
+                        addNewRestaurant={this.props.addNewRestaurant}
+                    />
                 </Modal>
             </div>
         )

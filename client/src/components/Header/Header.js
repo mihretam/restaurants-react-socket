@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 //import Badge from '@material-ui/core/Badge'
-import MenuIcon from '@material-ui/icons/Menu'
+//import MenuIcon from '@material-ui/icons/Menu'
 //import NotificationsIcon from '@material-ui/icons/Notifications'
 import PersonIcon from '@material-ui/icons/Person'
 import Typography from '@material-ui/core/Typography'
@@ -23,18 +23,18 @@ class Header extends Component {
   }
 
   render () {
-    const {classes, handleToggleDrawer} = this.props
+    const {classes} = this.props
     return (
       <AppBar position='fixed'>
         <Toolbar disableGutters={true} classes={{root: classes.toolbarRoot}}>
-          <IconButton
+          {/* <IconButton
             color='inherit'
             aria-label='Open drawer'
             onClick={handleToggleDrawer}
             className={classes.menuButton}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
          
           <Typography
             variant='title'

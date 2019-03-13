@@ -1,4 +1,4 @@
-import HomeScreen from '../../containers/HomeScreen/HomeScreen'
+//import HomeScreen from '../../containers/HomeScreen/HomeScreen'
 import SettingScreen from '../../containers/SettingScreen/SettingScreen'
 import NotFound from '../NotFound/NotFound'
 import LoginScreen from '../../containers/LoginScreen/LoginScreen'
@@ -8,16 +8,21 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import React from 'react'
 import Dashboard from '../Dashboard/Dashboard'
 import EmptyRoute from '../EmptyRoute/EmptyRoute'
-import RestaurantApp from '../../RestaurantApp';
+import RestaurantScreen from '../../containers/Restaurants/Restaurants';
 
 const routesList = [
+  {
+    path: '/restaurants',
+    component: RestaurantScreen,
+    layoutType: LayoutType.dashboard,
+    authenticate: true
+  },
   {
     path: '/',
     exact: true,
     component: LoginScreen,
     layoutType: LayoutType.empty,
     authenticate: false
-
   },
   {
     path: '/index.html',
@@ -32,26 +37,15 @@ const routesList = [
     layoutType: LayoutType.empty,
     authenticate: false
   },
-  {
-    path: '/home',
-    component: HomeScreen,
-    layoutType: LayoutType.dashboard,
-    authenticate: true
-  },
+ 
   {
     path: '/signin',
-    exact: false,
+    exact: true,
     component: LoginScreen,
     layoutType: LayoutType.empty,
     authenticate: false
   },
-  {
-    path: '/restaurants',
-    exact: true,
-    component: RestaurantApp,
-    layoutType: LayoutType.dashboard,
-    authenticate: true
-  },
+  
   {
     path: '/setting',
     exact: false,
@@ -72,14 +66,15 @@ const routesList = [
 ]
 
 const RoutesList = (props) => {
-  const {isAuthenticated} = props
+  //const {isAuthenticated} = props
+  const isAuthenticated = true
   return (
     <Router>
       <Switch>
         {routesList.map((route, index) => (
 
-            (route.authenticate === isAuthenticated) ? (
-              (route.layoutType !== LayoutType.empty) ?
+            (route.authenticate === isAuthenticated || true) ? (
+              (route.layoutType !== LayoutType.empty || true) ?
                 (
                   <Dashboard key={index} path={route.path} exact={route.exact} component={route.component} />
                 ) : (
@@ -94,3 +89,5 @@ const RoutesList = (props) => {
 }
 
 export default RoutesList
+
+//<Dashboard key={index} path={route.path} exact={route.exact} component={route.component} />

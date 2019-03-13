@@ -32,7 +32,7 @@ const InputNewRestaurant = (props) => {
     return (
         <div style={getModalStyle()} className={classes.paper}>
             <Typography variant="h6" id="modal-title">New restaurant name:</Typography>
-            <Input label="Restaurant names" type="" clicked={props.clicked} closeHandler={props.closeHandler}/>
+            <Input label="Restaurant names" type="" clicked={props.addNewRestaurant} closeHandler={props.closeHandler}/>
         </div>
     );
 }

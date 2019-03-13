@@ -42,8 +42,7 @@ class AddRestaurantButton extends Component {
                     open={this.state.open}
                     onClose={this.handleClose}
                 >
-
-                    <InputNewRestaurant closeHandler={this.handleClose} clicked={this.props.clicked}  />
+                    <InputNewRestaurant closeHandler={this.handleClose} addNewRestaurant={this.props.addNewRestaurant}  />
                 </Modal>
             </div>
         )

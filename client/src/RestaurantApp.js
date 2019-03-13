@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import RestaurantList from './containers/RestaurantList/RestaurantList';
+import Restaurants from './containers/Restaurants/Restaurants';
 
 class App extends Component {
   render() {
     return (
-      <React.Fragment>
-        <RestaurantList />
-      </React.Fragment>
+      <Restaurants />
     )
   }
 }

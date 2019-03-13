@@ -1,4 +1,4 @@
-import HomeScreen from '../../containers/HomeScreen/HomeScreen'
+//import HomeScreen from '../../containers/HomeScreen/HomeScreen'
 import SettingScreen from '../../containers/SettingScreen/SettingScreen'
 import NotFound from '../NotFound/NotFound'
 import LoginScreen from '../../containers/LoginScreen/LoginScreen'
@@ -11,6 +11,12 @@ import EmptyRoute from '../EmptyRoute/EmptyRoute'
 import RestaurantApp from '../../RestaurantApp';
 
 const routesList = [
+  {
+    path: '/restaurants',
+    component: RestaurantApp,
+    layoutType: LayoutType.dashboard,
+    authenticate: true
+  },
   {
     path: '/',
     exact: true,
@@ -32,12 +38,7 @@ const routesList = [
     layoutType: LayoutType.empty,
     authenticate: false
   },
-  {
-    path: '/home',
-    component: HomeScreen,
-    layoutType: LayoutType.dashboard,
-    authenticate: true
-  },
+ 
   {
     path: '/signin',
     exact: false,
@@ -45,13 +46,7 @@ const routesList = [
     layoutType: LayoutType.empty,
     authenticate: false
   },
-  {
-    path: '/restaurants',
-    exact: true,
-    component: RestaurantApp,
-    layoutType: LayoutType.dashboard,
-    authenticate: true
-  },
+  
   {
     path: '/setting',
     exact: false,

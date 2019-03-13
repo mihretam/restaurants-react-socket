@@ -4,10 +4,10 @@ import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Header from '../../components/Header/index'
-import Sidebar from '../../components/Sidebar/index'
+//import Sidebar from '../../components/Sidebar/index'
 import { logoutUser } from '../../store/actions/authentication'
 import styles from './styles'
-const drawerWidth = 240;
+//const drawerWidth = 240;
 
 class MainLayout extends Component {
   state = {
@@ -37,7 +37,7 @@ class MainLayout extends Component {
             {children}
           </main>
         </div>
-        <Sidebar open={this.state.open} drawerWidth={drawerWidth} />
+       {/*<Sidebar open={this.state.open} drawerWidth={drawerWidth} /> */}
       </Fragment>
     )
   }

@@ -10,7 +10,8 @@ const styles ={
     marginRight: 36
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    marginLeft: 12
   }
 
   

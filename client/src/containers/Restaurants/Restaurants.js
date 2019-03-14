@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import RestaurantList from '../../components/RestaurantList/RestaurantList';
 import NewRestaurantButton from '../../components/Button/NewRestaurantButton/NewRestaurantButton';
-import Orders from '../../components/Orders/Orders';
+import Orders from '../Orders/Orders';
 import axios from '../../services/RestaurantsAxios';
 import './Restaurants.css';
 
@@ -45,7 +45,7 @@ class Restaurants extends Component {
     }
 
     render() {
-      const { listOfRestaurants, orders } = this.state
+      const listOfRestaurants  = this.state.listOfRestaurants;
         return (
             <div className="flex-container">
                 <div className="restaurantList">
@@ -56,7 +56,7 @@ class Restaurants extends Component {
                    <NewRestaurantButton addNewRestaurant={this.newRestaurantHandler} /> 
                 </div>
                 <div className="orderDisplay">
-                    <Orders listOfOrders={orders} />
+                    <Orders listOfRestaurants={listOfRestaurants} />
                 </div>
             </div>
 

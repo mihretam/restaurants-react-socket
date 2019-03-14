@@ -60,7 +60,7 @@ export async function register(req, res, next) {
         role: req.body.role,
         confirmationToken: token,
         emailConfirmed: false,
-      };
+     };
       // Return error if any of the required fields are missing.
       if (!user.email || !user.fullName || !user.password) {
         return res.status(400)

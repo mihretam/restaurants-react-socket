@@ -1,5 +1,7 @@
 var {OrderList} = require('./../models/orderList');
 var {Restaurant} = require('./../models/restaurant');
+import User from '../models/user';
+
 
 const _ = require('lodash');
 
@@ -10,7 +12,7 @@ export async function addOrderList(req, res, next) {
         }
         var orderList = new OrderList ({
             restaurantId: req.body.restaurantId,
-        date: new Date().toDateString()
+            date: new Date().toDateString()
         });
 
         orderList.save().then( (savedOrderList) => {
@@ -26,7 +28,7 @@ export async function addFood(req, res, next) {
         if(!orderList) {
             res.status(404).send({message: 'OrderList not found'});
         }
-        orderList.addFood(req.body.food);
+        orderList.addFood(req.body.food, req.user.fullName);
         res.status(200).send('Added food successfully');
         next();
     }).catch( (err) => res.status(400).send(err) );
@@ -39,7 +41,7 @@ export async function deleteFood(req, res, next) {
         if(!orderList) {
             res.status(404).send({message: 'OrderList not found'});
         }
-        orderList.deleteFood(req.body.food);
+        orderList.deleteFood(req.body.food, req.user.fullName);
         res.status(200).send('Deleted food successfully');
         next();
     }).catch( (err) => res.status(400).send(err) );

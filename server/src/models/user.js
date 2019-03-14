@@ -45,6 +45,7 @@ const UserSchema = new Schema({
   confirmationToken: {
     type: String,
   },
+  
   emailConfirmed: {
     type: Boolean,
     default: false,
@@ -78,4 +79,8 @@ UserSchema.methods.comparePassword = async function (candidatePassword) {
 };
 
 
-export default mongoose.model('User', UserSchema);
+
+
+ export  default mongoose.model('User', UserSchema);
+// var User = mongoose.model('User', UserSchema);
+

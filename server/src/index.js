@@ -11,6 +11,8 @@ import morgan from 'morgan';
 import appRoot from 'app-root-path';
 import logger from './lib/logger';
 import authRoutes from './routes/v1/auth.routes';
+import restaurantRoutes from './routes/v1/restaurant.routes';
+import orderRoutes from './routes/v1/order.routes';
 import messages from './constants/errorMessages';
 import swaggerUi from 'swagger-ui-express';
 
@@ -61,7 +63,12 @@ app.disable('x-powered-by');
 // Api documentation route
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 // Listing routes here for V1 api endpoints
-app.use('/api/v1', authRoutes);
+
+const router = Express.Router()
+router.use('/auth', authRoutes)
+router.use('/restaurant', restaurantRoutes)
+router.use('/order', orderRoutes)
+app.use('/api/v1', router)
 
 // Handle robots.txt in express, for email confirm browser access.
 app.get('/robots.txt', function (req, res) {
@@ -71,10 +78,11 @@ app.get('/robots.txt', function (req, res) {
 
 // Catch all route declared for unhandled requests
 
-app.all('*', (req, res) => {
+/*app.all('*', (req, res) => {
   logger.error(`Attempted access to following route ${req.path} was intercepted by catch all route!`);
   return res.status(404).json({ message: messages.NOT_FOUND });
 });
+*/
 
 
 // Async Error handling middleware. NOTICE: This function has to be at the end of the file, after all other middleware.

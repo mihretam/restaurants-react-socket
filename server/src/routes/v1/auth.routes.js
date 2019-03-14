@@ -13,6 +13,8 @@ router.route('/forgotPassword').post(asyncWrapper(AuthController.forgotPasswordR
 router.route('/resetPassword/:token').post(asyncWrapper(AuthController.resetPassword));
 router.route('/confirmEmail/:token').get(asyncWrapper(AuthController.emailConfirm));
 
+
+
 // Profile routes
 router.route('/profile').get([authenticate, permit('Brand', 'Influencer', 'Admin')], asyncWrapper(AuthController.profile));
 

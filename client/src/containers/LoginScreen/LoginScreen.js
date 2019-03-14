@@ -38,14 +38,16 @@ class LoginScreen extends Component {
 
   componentDidMount () {
     const {auth, history} = this.props
+    // TEMP SOLUTION
+    auth.isAuthenticated = true
     if (auth.isAuthenticated) {
-      history.push('/home')
+      history.push('/restaurants')
     }
   }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push('/home')
+      this.props.history.push('/restaurants')
     }
 
     if (nextProps.errors) {
@@ -56,6 +58,7 @@ class LoginScreen extends Component {
   }
 
   render () {
+    console.log('render login')
     const {classes, errors} = this.props
     const {user} = this.state
     return (

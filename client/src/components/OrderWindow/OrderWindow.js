@@ -9,13 +9,13 @@ import Order from './Order/Order';
 const styles = theme => ({
     paper: {
         height: 'auto',
-        width: 230,
+        width: 250,
         margin: 10,
         padding: 15
     },
     paper2: {
         height: 'auto',
-        width: 200,
+        width: 220,
         margin: 0,
         paddingTop: 3,
         paddingBottom: 3,
@@ -34,21 +34,19 @@ const orderWindow = (props) => {
         );
     });
 
-    const newMealHandler = () => {
-        console.log('123');
-    }
-
     return (
         <div>
             <Grid key={props.key} item>
                 <Paper className={classes.paper}>
                     <Paper className={classes.paper2}>
                         <h2>{props.restaurant.restaurantName}</h2>
-                        <p>{props.restaurant.workHours}</p>
-                        <p>{props.restaurant.restaurantLink}</p>
+                        <p>Work Hours: {props.restaurant.workHours}</p>
+                        <p>URL: {props.restaurant.phoneNumber}</p>
                     </Paper>
-                    {currentMeals}
-                    <form className={classes.container} noValidate autoComplete="off" onSubmit={newMealHandler}>
+                    <div style={{margin: '30px'}}>
+                        {currentMeals}
+                    </div>
+                    <form className={classes.container} noValidate autoComplete="off" onSubmit={props.newMealHandler}>
                         <TextField
                             id="standard-name"
                             label="New Item"

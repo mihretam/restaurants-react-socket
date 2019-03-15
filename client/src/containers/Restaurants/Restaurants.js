@@ -9,7 +9,6 @@ import './Restaurants.css';
 class Restaurants extends Component {
     state = {
         listOfRestaurants: [
-
         ],
         listOfOrders: [
             // {
@@ -31,7 +30,6 @@ class Restaurants extends Component {
     formatName = (newRestaurant) => {
         return newRestaurant.charAt(0).toUpperCase() + newRestaurant.slice(1).toLowerCase();
     }
-
 
     newRestaurantHandler = (newRestaurant) => {
         if (newRestaurant.name === "") {
@@ -59,9 +57,13 @@ class Restaurants extends Component {
             })
     }
 
+    newMealHandler = (event) => {
+        event.preventDefault();
+        console.log(event.target.value);
+    }
+
     render() {
         const { listOfRestaurants, listOfOrders } = this.state;
-
         return (
             <div className="flex-container">
                 <div className="restaurantList">
@@ -75,7 +77,7 @@ class Restaurants extends Component {
                     <Orders
                         listOfRestaurants={listOfRestaurants}
                         listOfOrders={listOfOrders}
-                    />
+                        newMealHandler={(event) => this.newMealHandler(event)} />
                 </div>
             </div>
 

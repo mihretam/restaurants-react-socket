@@ -12,7 +12,20 @@ class Restaurants extends Component {
         listOfRestaurants: [
             {restaurantId: 2, restaurantName: 'asdas'}
         ],
-        orders: [1, 2]
+        listOfOrders: [
+            {
+                _id: '101',
+                restaurantID: '201',
+                orders: ['cevapi', 'grah','salata','pomfrit'],
+                date: ''
+            },
+            {
+                _id: '102',
+                restaurantID: '202',
+                orders: ['palacinci'],
+                date: ''
+            }
+        ]
     }
 
     formatName = (newRestaurant) => {
@@ -56,7 +69,7 @@ class Restaurants extends Component {
                    <NewRestaurantButton addNewRestaurant={this.newRestaurantHandler} /> 
                 </div>
                 <div className="orderDisplay">
-                    <Orders listOfRestaurants={listOfRestaurants} />
+                    <Orders listOfRestaurants={listOfOrders} />
                 </div>
             </div>
 

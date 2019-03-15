@@ -4,10 +4,14 @@ import OrderWindow from '../../components/OrderWindow/OrderWindow';
 
 
 class Orders extends Component {
+
     render() {
         const orderWindows = this.props.listOfOrders.map(order => {
             return (
-                <OrderWindow key={order._id} restaurantName={order.restaurantID} orderList={order.meals} />
+                <OrderWindow
+                    key={order._id}
+                    orderList={order.meals}
+                    restaurant={this.props.listOfRestaurants[order.restaurantID]} />
             )
         });
         return (

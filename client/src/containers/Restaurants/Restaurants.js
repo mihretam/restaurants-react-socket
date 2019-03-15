@@ -14,6 +14,12 @@ class Restaurants extends Component {
                 restaurantName: 'Sezam',
                 phoneNumber: '061-111-111',
                 workHours: '08:00-21:00'
+            },
+            {
+                restaurantID: '202',
+                restaurantName: 'Sezam1',
+                phoneNumber: '061-111-111',
+                workHours: '08:00-21:00'
             }
         ],
         listOfOrders: [

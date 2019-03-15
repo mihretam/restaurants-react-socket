@@ -9,9 +9,20 @@ import Order from './Order/Order';
 const styles = theme => ({
     paper: {
         height: 'auto',
-        width: 250,
+        width: 230,
         margin: 10,
-        padding: 20
+        padding: 15
+    },
+    paper2: {
+        height: 'auto',
+        width: 200,
+        margin: 0,
+        paddingTop: 3,
+        paddingBottom: 3,
+        paddingLeft: 15,
+        paddingRight: 15,
+        fontSize: 14,
+        textAlign: 'center'
     }
 });
 
@@ -31,7 +42,11 @@ const orderWindow = (props) => {
         <div>
             <Grid key={props.key} item>
                 <Paper className={classes.paper}>
-                    <h2>RestaurantName</h2>
+                    <Paper className={classes.paper2}>
+                        <h2>{props.restaurant.restaurantName}</h2>
+                        <p>{props.restaurant.workHours}</p>
+                        <p>{props.restaurant.phoneNumber}</p>
+                    </Paper>
                     {currentMeals}
                     <form className={classes.container} noValidate autoComplete="off" onSubmit={newMealHandler}>
                         <TextField

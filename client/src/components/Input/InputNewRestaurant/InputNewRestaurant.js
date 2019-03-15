@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Typography from '@material-ui/core/Typography';
+//import Typography from '@material-ui/core/Typography';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
@@ -17,6 +17,11 @@ function getModalStyle() {
 }
 
 const styles = theme => ({
+    root: {
+        display: 'block',
+        marginLeft: 10,
+        marginTop: 10
+    },
     paper: {
         position: 'absolute',
         width: theme.spacing.unit * 50,
@@ -24,19 +29,26 @@ const styles = theme => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
         outline: 'none',
+        display: 'flex',
+        justifyContent: 'center'
     },
+    input: {
+        float: 'none',
+        margin: 10
+    }
 
 });
 
 
 class InputNewRestaurant extends Component {
     state = {
-        Restaurant: "",
-        phoneNumber: "",
-        workHours: ""
+        restaurantName: "",
+        restaurantLink: "",
+        workingHours: ""
     }
 
-    handleChange = name => event => {
+    handleChange = name => (event, prevState) => {
+        console.log(prevState)
         this.setState({
             [name]: event.target.value,
         });
@@ -46,39 +58,28 @@ class InputNewRestaurant extends Component {
         const { classes, addNewRestaurant, closeHandler } = this.props;
         return (
             <div style={getModalStyle()} className={classes.paper}>
-                <Typography
-                    variant="h6"
-                    id="modal-title">
-                    New restaurant name:
-                 </Typography>
                 <form>
-                    <Input
-                        placeholder="Restaurant name"
-                        className={classes.input}
-                        inputProps={{
-                            'aria-label': 'Description',
-                        }}
-                        onChange={this.handleChange('name')}
-                    />
-                    {Object.keys(this.state).map(stateKey => {
+                    {Object.keys(this.state).map((stateKey, index) => {
+                        console.log(stateKey);
                         return <Input
+                            key={index}
                             placeholder={stateKey}
                             className={classes.input}
                             inputProps={{
                                 'aria-label': 'Description',
                             }}
-                            onChange={this.handleChange({ stateKey })}
+                            onChange={this.handleChange( stateKey )}
                         />
                     })}
                     <Button
                         variant="contained"
                         className={classes.root}
                         onClick={() => {
-                            addNewRestaurant(this.state.name);
+                            addNewRestaurant(this.state);
                             closeHandler();
                         }}>
-                        Add
-                </Button>
+                        Submit
+                    </Button>
                 </form>
             </div>
         );

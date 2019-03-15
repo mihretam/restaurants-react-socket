@@ -3,38 +3,26 @@ import React, { Component } from 'react';
 import RestaurantList from '../../components/RestaurantList/RestaurantList';
 import NewRestaurantButton from '../../components/Button/NewRestaurantButton/NewRestaurantButton';
 import Orders from '../Orders/Orders';
-import axios from '../../services/RestaurantsAxios';
+import axios from '../../services/Axios';
 import './Restaurants.css';
 
 class Restaurants extends Component {
     state = {
         listOfRestaurants: [
-            {
-                _id: '201',
-                restaurantName: 'Sezam',
-                phoneNumber: '061-111-111',
-                workHours: '08:00-21:00'
-            },
-            {
-                _id: '202',
-                restaurantName: 'Sezam1',
-                phoneNumber: '061-111-111',
-                workHours: '08:00-21:00'
-            }
         ],
         listOfOrders: [
-            {
-                _id: '101',
-                restaurantID: '201',
-                meals: ['cevapi', 'grah', 'salata', 'pomfrit'],
-                date: ''
-            },
-            {
-                _id: '102',
-                restaurantID: '202',
-                meals: ['palacinci'],
-                date: ''
-            }
+            // {
+            //     _id: '101',
+            //     restaurantID: '201',
+            //     meals: ['cevapi', 'grah', 'salata', 'pomfrit'],
+            //     date: ''
+            // },
+            // {
+            //     _id: '102',
+            //     restaurantID: '202',
+            //     meals: ['palacinci'],
+            //     date: ''
+            // }
         ]
 
     }
@@ -44,12 +32,10 @@ class Restaurants extends Component {
     }
 
     newRestaurantHandler = (newRestaurant) => {
-        if (newRestaurant === "") {
+        if (newRestaurant.name === "") {
             return;
         }
-        const updatedListOfRestaurants = [...this.state.listOfRestaurants];
-        updatedListOfRestaurants.push({ restaurantId: newRestaurant, restaurantName: this.formatName(newRestaurant) })
-        this.setState({ listOfRestaurants: updatedListOfRestaurants });
+        axios.post('restaurant/add-restaurant', newRestaurant)
     }
 
     newOrderHandler = () => {
@@ -61,10 +47,10 @@ class Restaurants extends Component {
     }
 
     componentDidMount() {
-        axios.get('/restaurants/list')
+        axios.get('/restaurant/restaurant-list')
             .then(response => {
+                console.log(response);
                 const currentListOfRestaurants = response.data;
-
                 this.setState({ listOfRestaurants: currentListOfRestaurants });
             })
     }
@@ -86,7 +72,10 @@ class Restaurants extends Component {
                     <NewRestaurantButton addNewRestaurant={this.newRestaurantHandler} />
                 </div>
                 <div className="orderDisplay">
-                    <Orders listOfRestaurants={listOfRestaurants} listOfOrders={listOfOrders} newMealHandler={(event) => this.newMealHandler(event)} />
+                    <Orders
+                        listOfRestaurants={listOfRestaurants}
+                        listOfOrders={listOfOrders}
+                        newMealHandler={(event) => this.newMealHandler(event)} />
                 </div>
             </div>
 

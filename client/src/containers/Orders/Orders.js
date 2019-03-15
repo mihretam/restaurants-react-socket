@@ -9,13 +9,13 @@ class Orders extends Component {
             {
                 _id: '101',
                 restaurantID: '201',
-                orders: ['cevapi', 'grah','salata','pomfrit'],
+                meals: ['cevapi', 'grah','salata','pomfrit'],
                 date: ''
             },
             {
                 _id: '102',
                 restaurantID: '202',
-                orders: ['palacinci'],
+                meals: ['palacinci'],
                 date: ''
             }
         ]
@@ -24,7 +24,7 @@ class Orders extends Component {
     render() {
         const orderWindows = this.state.listOfOrders.map(order => {
             return (
-                <OrderWindow key={order._id} restaurantName={order.restaurantID} orderList={order.orders} />
+                <OrderWindow key={order._id} restaurantName={order.restaurantID} orderList={order.meals} />
             )
         });
         return (

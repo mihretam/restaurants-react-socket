@@ -32,7 +32,7 @@ class AddRestaurantButton extends Component {
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, addNewRestaurant } = this.props;
         return (
             <div>
                 <Button
@@ -50,7 +50,7 @@ class AddRestaurantButton extends Component {
                 >
                     <InputNewRestaurant
                         closeHandler={this.handleClose}
-                        addNewRestaurant={this.props.addNewRestaurant}
+                        addNewRestaurant={addNewRestaurant}
                     />
                 </Modal>
             </div>

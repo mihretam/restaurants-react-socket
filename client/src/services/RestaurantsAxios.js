@@ -1,7 +1,9 @@
 import axios from 'axios';
+import config from '../config/config';
+const { apiEndpoint } = config;
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3001/api/v1'
+    baseURL: apiEndpoint
 })
 
 

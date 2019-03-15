@@ -45,7 +45,7 @@ const orderWindow = (props) => {
                     <Paper className={classes.paper2}>
                         <h2>{props.restaurant.restaurantName}</h2>
                         <p>{props.restaurant.workHours}</p>
-                        <p>{props.restaurant.phoneNumber}</p>
+                        <p>{props.restaurant.restaurantLink}</p>
                     </Paper>
                     {currentMeals}
                     <form className={classes.container} noValidate autoComplete="off" onSubmit={newMealHandler}>

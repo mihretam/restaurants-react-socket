@@ -10,7 +10,7 @@ class Restaurants extends Component {
     state = {
         listOfRestaurants: [
             {
-                _id: 1,
+                restaurantID: '201',
                 restaurantName: 'Sezam',
                 phoneNumber: '061-111-111',
                 workHours: '08:00-21:00'
@@ -20,7 +20,7 @@ class Restaurants extends Component {
             {
                 _id: '101',
                 restaurantID: '201',
-                meals: ['cevapi', 'grah','salata','pomfrit'],
+                meals: ['cevapi', 'grah', 'salata', 'pomfrit'],
                 date: ''
             },
             {
@@ -30,10 +30,21 @@ class Restaurants extends Component {
                 date: ''
             }
         ]
+
     }
 
     formatName = (newRestaurant) => {
         return newRestaurant.charAt(0).toUpperCase() + newRestaurant.slice(1).toLowerCase();
+    }
+
+    toObject = () => {
+        const restaurantListObject = {};
+        this.state.listOfRestaurants.forEach(element => {
+            const { restaurantID, ...otherProperties } = element
+            restaurantListObject[restaurantID] = { ...otherProperties }
+        });
+
+        return restaurantListObject;
     }
 
     newRestaurantHandler = (newRestaurant) => {
@@ -54,26 +65,29 @@ class Restaurants extends Component {
     }
 
     componentDidMount() {
-         axios.get('/restaurants/list')
-                .then(response => {
-                 const currentListOfRestaurants = response.data;
-                 this.setState({ listOfRestaurants: currentListOfRestaurants });
-             })
+        axios.get('/restaurants/list')
+            .then(response => {
+                const currentListOfRestaurants = response.data;
+
+                this.setState({ listOfRestaurants: currentListOfRestaurants });
+            })
     }
 
     render() {
-      const listOfRestaurants  = this.state.listOfRestaurants;
+        const { listOfRestaurants, listOfOrders } = this.state;
+
+        console.log(this.toObject(listOfRestaurants));
         return (
             <div className="flex-container">
                 <div className="restaurantList">
-                   <RestaurantList 
-                        listOfRestaurants={listOfRestaurants} 
-                        openNewOrder={this.newOrderHandler} 
-                   />
-                   <NewRestaurantButton addNewRestaurant={this.newRestaurantHandler} /> 
+                    <RestaurantList
+                        listOfRestaurants={listOfRestaurants}
+                        openNewOrder={this.newOrderHandler}
+                    />
+                    <NewRestaurantButton addNewRestaurant={this.newRestaurantHandler} />
                 </div>
                 <div className="orderDisplay">
-                    <Orders listOfOrders={this.state.listOfOrders} />
+                    <Orders listOfRestaurants={this.toObject(listOfRestaurants)} listOfOrders={listOfOrders} />
                 </div>
             </div>
 

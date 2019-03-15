@@ -37,15 +37,17 @@ class Restaurants extends Component {
         if (newRestaurant.name === "") {
             return;
         }
-        axios.post('restaurant/add-restaurant', newRestaurant)
+        axios.post('/restaurant/add-restaurant', newRestaurant)
     }
 
-    newOrderHandler = () => {
-
-        let updatedOrders = [...this.state.orders];
-        updatedOrders.push(updatedOrders.length + 1);
-        console.log(updatedOrders)
-        this.setState({ orders: updatedOrders })
+    newOrderHandler = (id) => {
+        console.log("post", id);
+        axios.post('/order/add-order-list', id)
+            .then(response => {
+                console.log(response.data)
+                this.setState({ listOfOrders: response.data })
+            })
+        
     }
 
     componentDidMount() {
@@ -72,7 +74,7 @@ class Restaurants extends Component {
                 <div className="orderDisplay">
                     <Orders
                         listOfRestaurants={listOfRestaurants}
-                        listOfOrders={listOfOrders} 
+                        listOfOrders={listOfOrders}
                     />
                 </div>
             </div>

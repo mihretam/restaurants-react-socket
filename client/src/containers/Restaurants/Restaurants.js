@@ -8,7 +8,6 @@ import './Restaurants.css';
 
 class Restaurants extends Component {
     state = {
-
         listOfRestaurants: [
             {
                 restaurantID: '201',
@@ -88,7 +87,11 @@ class Restaurants extends Component {
                     <NewRestaurantButton addNewRestaurant={this.newRestaurantHandler} />
                 </div>
                 <div className="orderDisplay">
+<<<<<<< HEAD
                     <Orders listOfRestaurants={this.toObject(listOfRestaurants)} listOfOrders={listOfOrders} />
+=======
+                    <Orders listOfRestaurants={listOfOrders} />
+>>>>>>> 66243b73bca26628ee5136dec2356f9c07c1f87b
                 </div>
             </div>
 

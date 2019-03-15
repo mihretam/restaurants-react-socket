@@ -4,8 +4,11 @@ import OrderWindow from '../../components/OrderWindow/OrderWindow';
 
 
 class Orders extends Component {
+<<<<<<< HEAD
   
 
+=======
+>>>>>>> 66243b73bca26628ee5136dec2356f9c07c1f87b
     render() {
         const orderWindows = this.props.listOfOrders.map(order => {
             return (

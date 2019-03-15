@@ -10,13 +10,13 @@ class Restaurants extends Component {
     state = {
         listOfRestaurants: [
             {
-                restaurantID: '201',
+                _id: '201',
                 restaurantName: 'Sezam',
                 phoneNumber: '061-111-111',
                 workHours: '08:00-21:00'
             },
             {
-                restaurantID: '202',
+                _id: '202',
                 restaurantName: 'Sezam1',
                 phoneNumber: '061-111-111',
                 workHours: '08:00-21:00'
@@ -41,16 +41,6 @@ class Restaurants extends Component {
 
     formatName = (newRestaurant) => {
         return newRestaurant.charAt(0).toUpperCase() + newRestaurant.slice(1).toLowerCase();
-    }
-
-    toObject = () => {
-        const restaurantListObject = {};
-        this.state.listOfRestaurants.forEach(element => {
-            const { restaurantID, ...otherProperties } = element
-            restaurantListObject[restaurantID] = { ...otherProperties }
-        });
-
-        return restaurantListObject;
     }
 
     newRestaurantHandler = (newRestaurant) => {
@@ -79,10 +69,13 @@ class Restaurants extends Component {
             })
     }
 
+    newMealHandler = (event) => {
+        event.preventDefault();
+        console.log(event.target.value);
+    }
+
     render() {
         const { listOfRestaurants, listOfOrders } = this.state;
-
-        console.log(this.toObject(listOfRestaurants));
         return (
             <div className="flex-container">
                 <div className="restaurantList">
@@ -93,7 +86,7 @@ class Restaurants extends Component {
                     <NewRestaurantButton addNewRestaurant={this.newRestaurantHandler} />
                 </div>
                 <div className="orderDisplay">
-                    <Orders listOfRestaurants={this.toObject(listOfRestaurants)} listOfOrders={listOfOrders} />
+                    <Orders listOfRestaurants={listOfRestaurants} listOfOrders={listOfOrders} newMealHandler={(event) => this.newMealHandler(event)} />
                 </div>
             </div>
 

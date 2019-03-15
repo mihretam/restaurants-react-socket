@@ -8,9 +8,13 @@ import './Restaurants.css';
 
 class Restaurants extends Component {
     state = {
-
         listOfRestaurants: [
-            {restaurantId: 2, restaurantName: 'asdas'}
+            {
+                restaurantId: 1,
+                restaurantName: 'Sezam',
+                phoneNumber: '061-111-111',
+                workHours: '08:00-21:00'
+            }
         ],
         listOfOrders: [
             {

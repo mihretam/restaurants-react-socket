@@ -17,19 +17,23 @@ const styles = theme => ({
 
 const orderWindow = (props) => {
     const { classes } = props;
-    const currentOrders = props.orderList.map(order => {
+    const currentMeals = props.orderList.map((meal, index) => {
         return (
-            <Order>{order}</Order>
+            <Order key={index}>{meal}</Order>
         );
     });
+
+    const newMealHandler = () => {
+        console.log('123');
+    }
 
     return (
         <div>
             <Grid key={props.key} item>
                 <Paper className={classes.paper}>
                     <h2>RestaurantName</h2>
-                    {currentOrders}
-                    <form className={classes.container} noValidate autoComplete="off">
+                    {currentMeals}
+                    <form className={classes.container} noValidate autoComplete="off" onSubmit={newMealHandler}>
                         <TextField
                             id="standard-name"
                             label="New Item"

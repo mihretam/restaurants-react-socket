@@ -10,7 +10,7 @@ class Restaurants extends Component {
     state = {
         listOfRestaurants: [
             {
-                restaurantId: 1,
+                _id: 1,
                 restaurantName: 'Sezam',
                 phoneNumber: '061-111-111',
                 workHours: '08:00-21:00'
@@ -20,13 +20,13 @@ class Restaurants extends Component {
             {
                 _id: '101',
                 restaurantID: '201',
-                orders: ['cevapi', 'grah','salata','pomfrit'],
+                meals: ['cevapi', 'grah','salata','pomfrit'],
                 date: ''
             },
             {
                 _id: '102',
                 restaurantID: '202',
-                orders: ['palacinci'],
+                meals: ['palacinci'],
                 date: ''
             }
         ]
@@ -73,7 +73,7 @@ class Restaurants extends Component {
                    <NewRestaurantButton addNewRestaurant={this.newRestaurantHandler} /> 
                 </div>
                 <div className="orderDisplay">
-                    <Orders listOfRestaurants={listOfOrders} />
+                    <Orders listOfOrders={this.state.listOfOrders} />
                 </div>
             </div>
 

@@ -25,7 +25,7 @@ class InputWrapper extends Component {
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, addNewRestaurant, closeHandler } = this.props;
         return (
             <Fragment>
                 <Input
@@ -40,9 +40,11 @@ class InputWrapper extends Component {
                     variant="contained"
                     className={classes.root}
                     onClick={() => {
-                        this.props.clicked(this.state.name);
-                        this.props.closeHandler();
-                    }}>Add</Button>
+                        addNewRestaurant(this.state.name);
+                        closeHandler();
+                    }}>
+                    Add
+                </Button>
             </Fragment>
         );
     }

@@ -2,17 +2,29 @@ import React, { Component } from 'react';
 
 import RestaurantList from '../../components/RestaurantList/RestaurantList';
 import NewRestaurantButton from '../../components/Button/NewRestaurantButton/NewRestaurantButton';
-import Orders from '../../components/Orders/Orders';
-import axios from '../../services/RestaurantsAxios';
+import Orders from '../Orders/Orders';
+import axios from '../../services/Axios';
 import './Restaurants.css';
 
 class Restaurants extends Component {
     state = {
-
         listOfRestaurants: [
-            {restaurantId: 2, restaurantName: 'asdas'}
         ],
-        orders: [1, 2]
+        listOfOrders: [
+            // {
+            //     _id: '101',
+            //     restaurantID: '201',
+            //     meals: ['cevapi', 'grah', 'salata', 'pomfrit'],
+            //     date: ''
+            // },
+            // {
+            //     _id: '102',
+            //     restaurantID: '202',
+            //     meals: ['palacinci'],
+            //     date: ''
+            // }
+        ]
+
     }
 
     formatName = (newRestaurant) => {
@@ -20,43 +32,52 @@ class Restaurants extends Component {
     }
 
     newRestaurantHandler = (newRestaurant) => {
-        if (newRestaurant === "") {
+        if (newRestaurant.name === "") {
             return;
         }
-        const updatedListOfRestaurants = [...this.state.listOfRestaurants];
-        updatedListOfRestaurants.push({ restaurantId: newRestaurant, restaurantName: this.formatName(newRestaurant) })
-        this.setState({ listOfRestaurants: updatedListOfRestaurants });
+        axios.post('/restaurant/add-restaurant', newRestaurant)
     }
 
-    newOrderHandler = () => {
-
-        let updatedOrders = [...this.state.orders];
-        updatedOrders.push(updatedOrders.length + 1);
-        console.log(updatedOrders)
-        this.setState({ orders: updatedOrders })
+    newOrderHandler = (id) => {
+        console.log("post", id);
+        axios.post('/order/add-order-list', id)
+            .then(response => {
+                console.log(response.data)
+                this.setState({ listOfOrders: response.data })
+            })
+        
     }
 
     componentDidMount() {
-         axios.get('/restaurants/list')
-                .then(response => {
-                 const currentListOfRestaurants = response.data;
-                 this.setState({ listOfRestaurants: currentListOfRestaurants });
-             })
+        axios.get('/restaurant/restaurant-list')
+            .then(response => {
+                console.log(response);
+                const currentListOfRestaurants = response.data;
+                this.setState({ listOfRestaurants: currentListOfRestaurants });
+            })
+    }
+
+    newMealHandler = (event) => {
+        event.preventDefault();
+        console.log(event.target.value);
     }
 
     render() {
-      const { listOfRestaurants, orders } = this.state
+        const { listOfRestaurants, listOfOrders } = this.state;
         return (
             <div className="flex-container">
                 <div className="restaurantList">
-                   <RestaurantList 
-                        listOfRestaurants={listOfRestaurants} 
-                        openNewOrder={this.newOrderHandler} 
-                   />
-                   <NewRestaurantButton addNewRestaurant={this.newRestaurantHandler} /> 
+                    <RestaurantList
+                        listOfRestaurants={listOfRestaurants}
+                        openNewOrder={this.newOrderHandler}
+                    />
+                    <NewRestaurantButton addNewRestaurant={this.newRestaurantHandler} />
                 </div>
                 <div className="orderDisplay">
-                    <Orders listOfOrders={orders} />
+                    <Orders
+                        listOfRestaurants={listOfRestaurants}
+                        listOfOrders={listOfOrders}
+                        newMealHandler={(event) => this.newMealHandler(event)} />
                 </div>
             </div>
 

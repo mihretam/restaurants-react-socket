@@ -33,15 +33,15 @@ const orderWindow = (props) => {
             <Order key={index}>{meal}</Order>
         );
     });
-
+    console.log(props.restaurant.restaurantLink);
     return (
         <div>
             <Grid key={props.key} item>
                 <Paper className={classes.paper}>
                     <Paper className={classes.paper2}>
                         <h2>{props.restaurant.restaurantName}</h2>
-                        <p>Work Hours: {props.restaurant.workHours}</p>
-                        <p>URL: {props.restaurant.phoneNumber}</p>
+                        <p>Work Hours: {props.restaurant.workingHours}</p>
+                       <p>URL: <a href={"https://" + props.restaurant.restaurantLink} target="_blank">{props.restaurant.restaurantLink}</a></p>
                     </Paper>
                     <div style={{margin: '30px'}}>
                         {currentMeals}

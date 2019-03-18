@@ -7,7 +7,7 @@ import User from '../models/user';
 const _ = require('lodash');
 
 export async function addOrderList(req, res, next) {
-  Restaurant.findById(req.body.restaurantId).then((restaurant) => {
+  Re    staurant.findById(req.body.restaurantId).then((restaurant) => {
     if (!restaurant) {
       res.status(404).send({ message: 'The restaurant does not exist in the database' });
     }

@@ -4,7 +4,9 @@ import * as RestaurantController from '../../controllers/restaurant.controller'
 const router = new Router()
 
 router.route('/add-restaurant').post(RestaurantController.addRestaurant);
+router.route('/delete-restaurant').delete(RestaurantController.deleteRestaurant);
 router.route('/restaurant-list').get(RestaurantController.getRestaurantList);
+
 //router.route('/restaurant-id').get(RestaurantController.getRestaurantId);
 
 

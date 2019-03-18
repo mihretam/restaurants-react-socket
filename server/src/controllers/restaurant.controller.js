@@ -1,4 +1,6 @@
 var {Restaurant} = require('./../models/restaurant');
+var {OrderList} = require('./../models/orderList');
+
 const _ = require('lodash');
 
 export async function addRestaurant(req, res, next) {
@@ -11,6 +13,21 @@ export async function addRestaurant(req, res, next) {
     }, (err) => { res.status(400).send(err)});
 
 }
+
+
+export async function deleteRestaurant(req, res, next) {
+    const id = req.body.restaurantId;
+
+    OrderList.deleteMany({restaurantId: id}).then( (orderLists) => {
+     console.log("Removed order lists", orderLists);     
+    }).catch( (err) => { console.log(err); });
+
+    Restaurant.findByIdAndDelete(id).then( (restaurant) => {
+        res.status(200).send(restaurant);
+    }).catch( (err) => { res.status(400).send(err); });
+}
+
+
 
 export async function getRestaurantList(req, res, next) {
     

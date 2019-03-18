@@ -100,7 +100,7 @@ process.on('unhandledRejection', (reason, p) => {
 });
 
 // Starting the server
-app.listen(PORT, (error) => {
+app.listen(PORT,  (error) => {
   if (!error) {
     logger.info(`Serapion server is running on port: ${PORT}!`);
   }

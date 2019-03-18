@@ -5,16 +5,17 @@ const _ = require('lodash');
 var OrderListSchema = new mongoose.Schema({
     restaurantId: {
         type: String,
-        required: true,
+        required: true
     },
     date: {
-        type: String,
+        type: String
     },
-    orders: [{
+    closed: {
+       type: Boolean,
+       default: false
+    },
+    meals: [{
        food: {
-           type: String
-       },
-       user: {
            type: String
        }
     }],
@@ -22,24 +23,23 @@ var OrderListSchema = new mongoose.Schema({
     
 });
 
-OrderListSchema.methods.addFood = function (food, user) {
+OrderListSchema.methods.addFood = function (food) {
 
     var orderList = this;
-    orderList.orders = orderList.orders.concat([{food,user}]);
+    orderList.meals = orderList.meals.concat([{food}]);
+   // orderList.meals = orderList.meals.concat([{food,user}]);
     orderList.save();
 }  
 
-
-OrderListSchema.methods.deleteFood = function (food, user) {
+OrderListSchema.methods.deleteFood = function (food) {
     
     var orderList = this;
-    const filteredOrders = orderList.orders.filter ( (order) => {
-        return (!(order.food == food && order.user == user));
+    const filteredMeals = orderList.meals.filter ( (order) => {
+        return (!(order.food == food));
     });
-    console.log('filtered', filteredOrders);
-    console.log('original', orderList.orders);
-    if(filteredOrders.length !== orderList.orders.length) {
-      orderList.orders = filteredOrders;
+    
+    if(filteredMeals.length !== orderList.meals.length) {
+      orderList.meals = filteredMeals;
       orderList.save();
     }
     else {
@@ -48,9 +48,11 @@ OrderListSchema.methods.deleteFood = function (food, user) {
 
 }  
 
+
+
 OrderListSchema.methods.deleteAllFood = function () {
     var orderList = this;
-    orderList.orders = [];
+    orderList.meals = [];
     orderList.save();
 }  
 
@@ -59,3 +61,42 @@ var OrderList = mongoose.model('OrderList', OrderListSchema);
 
 
 module.exports = { OrderList };
+
+
+// var OrderListSchema = new mongoose.Schema({
+//     restaurantId: {
+//         type: String,
+//         required: true,
+//     },
+//     date: {
+//         type: String,
+//     },
+//     meals: [{
+//        food: {
+//            type: String
+//        },
+//        user: {
+//            type: String
+//        }
+//     }],
+   
+    
+// });
+
+
+// OrderListSchema.methods.deleteFood = function (food, user) {
+    
+//     var orderList = this;
+//     const filteredMeals = orderList.meals.filter ( (order) => {
+//         return (!(order.food == food && order.user == user));
+//     });
+    
+//     if(filteredMeals.length !== orderList.meals.length) {
+//       orderList.meals = filteredMeals;
+//       orderList.save();
+//     }
+//     else {
+//         throw new Error('The item was not found in the database');
+//     }
+
+// }  

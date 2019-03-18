@@ -15,9 +15,10 @@ class RestaurantListItem extends Component {
 
 
     render() {
-        const { classes, restaurantName, openNewOrder, key } = this.props;
+        const { classes, restaurantName, openNewOrder, restaurantId } = this.props;
+        console.log(this.props.restaurantId);
         return (
-            <ListItem button onClick={() => openNewOrder(key)}  >
+            <ListItem button onClick={() => openNewOrder(restaurantId)}  >
                 <ListItemText primary={restaurantName} classes={{ primary: classes.listItemText }} />
             </ListItem>
         );

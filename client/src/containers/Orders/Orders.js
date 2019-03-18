@@ -12,7 +12,7 @@ class Orders extends Component {
 
     render() {        
         const orderWindows = this.props.listOfOrders.map(order => {
-            let currentRestaurant = this.getCurrentRestaurant(this.props.listOfRestaurants, order.restaurantID);
+            let currentRestaurant = this.getCurrentRestaurant(this.props.listOfRestaurants, order.restaurantId);
             return (
                 <OrderWindow
                     key={order._id}

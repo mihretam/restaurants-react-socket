@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import RestaurantList from '../../components/RestaurantList/RestaurantList';
 import NewRestaurantButton from '../../components/Button/NewRestaurantButton/NewRestaurantButton';
+import moment from 'moment';
 import Orders from '../Orders/Orders';
 import axios from '../../services/Axios';
 import './Restaurants.css';
@@ -42,19 +43,24 @@ class Restaurants extends Component {
         console.log("post", id);
         axios.post('/order/add-order-list', id)
             .then(response => {
-                console.log(response.data)
                 this.setState({ listOfOrders: response.data })
             })
-        
+
     }
 
     componentDidMount() {
         axios.get('/restaurant/restaurant-list')
             .then(response => {
-                console.log(response);
                 const currentListOfRestaurants = response.data;
                 this.setState({ listOfRestaurants: currentListOfRestaurants });
-            })
+            });
+
+        const date = moment(new Date()).format('YYYY-MM-DD');
+        axios.get('/order/order-lists/' + date.toString())
+            .then(response => {
+                const currentListOfOrders = response.data;
+                this.setState({ listOfOrders: currentListOfOrders });
+            });
     }
 
     newMealHandler = (event) => {

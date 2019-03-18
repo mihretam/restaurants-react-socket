@@ -2,44 +2,57 @@ const mongoose = require('mongoose');
 const _ = require('lodash');
 
 
-const OrderListSchema = new mongoose.Schema({
-  restaurantId: {
-    type: String,
-    required: true,
-  },
-  date: {
-    type: String,
-  },
-  orders: [{
-    food: {
-      type: String,
+var OrderListSchema = new mongoose.Schema({
+    restaurantId: {
+        type: String,
+        required: true
     },
-    user: {
-      type: String,
+    date: {
+        type: String
     },
-  }],
-
-
+    closed: {
+       type: Boolean,
+       default: false
+    },
+    meals: [{
+       food: {
+           type: String
+       }
+    }],
+   
+    
 });
 
-OrderListSchema.methods.addFood = function (food, user) {
+OrderListSchema.methods.addFood = function (food) {
 
-  const orderList = this;
-  orderList.orders = orderList.orders.concat([{ food, user }]);
-  orderList.save();
-};
+    var orderList = this;
+    orderList.meals = orderList.meals.concat([{food}]);
+   // orderList.meals = orderList.meals.concat([{food,user}]);
+    orderList.save();
+}  
+
+OrderListSchema.methods.deleteFood = function (food) {
+    
+    var orderList = this;
+    const filteredMeals = orderList.meals.filter ( (order) => {
+        return (!(order.food == food));
+    });
+    
+    if(filteredMeals.length !== orderList.meals.length) {
+      orderList.meals = filteredMeals;
+      orderList.save();
+    }
+    else {
+        throw new Error('The item was not found in the database');
+    }
+
+}  
 
 
-OrderListSchema.methods.deleteFood = function (food, user) {
 
-  const orderList = this;
-  const filteredOrders = orderList.orders.filter((order) => {
-    return (!(order.food == food && order.user == user));
-  });
-  console.log('filtered', filteredOrders);
-  console.log('original', orderList.orders);
-  if (filteredOrders.length !== orderList.orders.length) {
-    orderList.orders = filteredOrders;
+OrderListSchema.methods.deleteAllFood = function () {
+    var orderList = this;
+    orderList.meals = [];
     orderList.save();
   }
   else {
@@ -59,3 +72,42 @@ const OrderList = mongoose.model('OrderList', OrderListSchema);
 
 
 module.exports = { OrderList };
+
+
+// var OrderListSchema = new mongoose.Schema({
+//     restaurantId: {
+//         type: String,
+//         required: true,
+//     },
+//     date: {
+//         type: String,
+//     },
+//     meals: [{
+//        food: {
+//            type: String
+//        },
+//        user: {
+//            type: String
+//        }
+//     }],
+   
+    
+// });
+
+
+// OrderListSchema.methods.deleteFood = function (food, user) {
+    
+//     var orderList = this;
+//     const filteredMeals = orderList.meals.filter ( (order) => {
+//         return (!(order.food == food && order.user == user));
+//     });
+    
+//     if(filteredMeals.length !== orderList.meals.length) {
+//       orderList.meals = filteredMeals;
+//       orderList.save();
+//     }
+//     else {
+//         throw new Error('The item was not found in the database');
+//     }
+
+// }  

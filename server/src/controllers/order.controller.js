@@ -23,9 +23,9 @@ export async function addOrderList(req, res, next) {
     orderList.save().then((savedOrderList) => {
       res.status(200).send(savedOrderList);
       next();
-    }).catch(err => res.status(400).send(err));
-  });
-}
+    }).catch((err) => res.status(400).send(err));
+  }
+  
 export async function deleteOrderList(req, res, next) {
     OrderList.findById(req.body.orderListId).then( (orderList) => {
         if(!orderList) {

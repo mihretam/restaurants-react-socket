@@ -54,11 +54,7 @@ OrderListSchema.methods.deleteAllFood = function () {
     var orderList = this;
     orderList.meals = [];
     orderList.save();
-  }
-  else {
-    throw new Error('The item was not found in the database');
-  }
-
+ 
 };
 
 OrderListSchema.methods.deleteAllFood = function () {

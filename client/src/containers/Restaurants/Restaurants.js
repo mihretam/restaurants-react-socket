@@ -2,29 +2,16 @@ import React, { Component } from 'react';
 
 import RestaurantList from '../../components/RestaurantList/RestaurantList';
 import NewRestaurantButton from '../../components/Button/NewRestaurantButton/NewRestaurantButton';
+import moment from 'moment';
 import Orders from '../Orders/Orders';
 import axios from '../../services/Axios';
+import Paper from '@material-ui/core/Paper';
 import './Restaurants.css';
 
 class Restaurants extends Component {
     state = {
-        listOfRestaurants: [
-        ],
-        listOfOrders: [
-            // {
-            //     _id: '101',
-            //     restaurantID: '201',
-            //     meals: ['cevapi', 'grah', 'salata', 'pomfrit'],
-            //     date: ''
-            // },
-            // {
-            //     _id: '102',
-            //     restaurantID: '202',
-            //     meals: ['palacinci'],
-            //     date: ''
-            // }
-        ]
-
+        listOfRestaurants: [],
+        listOfOrders: []
     }
 
     formatName = (newRestaurant) => {
@@ -35,26 +22,40 @@ class Restaurants extends Component {
         if (newRestaurant.name === "") {
             return;
         }
-        axios.post('/restaurant/add-restaurant', newRestaurant)
+        axios.post('/restaurant/add-restaurant', { ...newRestaurant })
+            .then(response => {
+                console.log(response);
+                const currentListOfRestaurants = this.state.listOfRestaurants;
+                currentListOfRestaurants.push(response.data);
+                this.setState({listOfRestaurants: currentListOfRestaurants});
+            })
     }
 
-    newOrderHandler = (id) => {
-        console.log("post", id);
-        axios.post('/order/add-order-list', id)
+    newOrderHandler = (restaurantId) => {
+        axios.post('/order/add-order-list', { restaurantId })
             .then(response => {
-                console.log(response.data)
-                this.setState({ listOfOrders: response.data })
+                const currentListOfOrders = this.state.listOfOrders;
+                currentListOfOrders.push(response.data);
+                this.setState({ listOfOrders: currentListOfOrders })
             })
-        
+            .catch(error => console.log("error"));
+
     }
 
     componentDidMount() {
         axios.get('/restaurant/restaurant-list')
             .then(response => {
-                console.log(response);
                 const currentListOfRestaurants = response.data;
                 this.setState({ listOfRestaurants: currentListOfRestaurants });
-            })
+            });
+
+        const date = moment(new Date()).format('YYYY-MM-DD');
+        axios.get('/order/order-lists/' + date.toString())
+            .then(response => {
+                const currentListOfOrders = response.data;
+                console.log(currentListOfOrders)
+                this.setState({ listOfOrders: currentListOfOrders });
+            });
     }
 
     newMealHandler = (event) => {
@@ -65,19 +66,21 @@ class Restaurants extends Component {
     render() {
         const { listOfRestaurants, listOfOrders } = this.state;
         return (
-            <div className="flex-container">
-                <div className="restaurantList">
+            <div>
+                <Paper className="restaurantList">
                     <RestaurantList
                         listOfRestaurants={listOfRestaurants}
                         openNewOrder={this.newOrderHandler}
                     />
                     <NewRestaurantButton addNewRestaurant={this.newRestaurantHandler} />
-                </div>
-                <div className="orderDisplay">
-                    <Orders
-                        listOfRestaurants={listOfRestaurants}
-                        listOfOrders={listOfOrders}
-                        newMealHandler={(event) => this.newMealHandler(event)} />
+                </Paper>
+                <div className="flex-container">
+                    <div className="orderDisplay">
+                        <Orders
+                            listOfRestaurants={listOfRestaurants}
+                            listOfOrders={listOfOrders}
+                            newMealHandler={(event) => this.newMealHandler(event)} />
+                    </div>
                 </div>
             </div>
 

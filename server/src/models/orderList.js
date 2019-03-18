@@ -54,10 +54,21 @@ OrderListSchema.methods.deleteAllFood = function () {
     var orderList = this;
     orderList.meals = [];
     orderList.save();
-}  
+  }
+  else {
+    throw new Error('The item was not found in the database');
+  }
+
+};
+
+OrderListSchema.methods.deleteAllFood = function () {
+  const orderList = this;
+  orderList.orders = [];
+  orderList.save();
+};
 
 
-var OrderList = mongoose.model('OrderList', OrderListSchema);
+const OrderList = mongoose.model('OrderList', OrderListSchema);
 
 
 module.exports = { OrderList };

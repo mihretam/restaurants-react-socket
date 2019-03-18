@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Typography from '@material-ui/core/Typography';
+//import Typography from '@material-ui/core/Typography';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
@@ -48,10 +48,10 @@ class InputNewRestaurant extends Component {
     }
 
     handleChange = name => (event) => {
-        
+       
         this.setState({
             [name]: event.target.value,
-        },);
+        });
     };
 
     render() {
@@ -60,10 +60,9 @@ class InputNewRestaurant extends Component {
             <div style={getModalStyle()} className={classes.paper}>
                 <form>
                     {Object.keys(this.state).map((stateKey, index) => {
-                        console.log(stateKey);
                         return <Input
                             key={index}
-                            placeholder={stateKey}
+                            placeholder={"text"}
                             className={classes.input}
                             inputProps={{
                                 'aria-label': 'Description',
@@ -73,6 +72,7 @@ class InputNewRestaurant extends Component {
                     })}
                     <Button
                         variant="contained"
+                        color='primary'
                         className={classes.root}
                         onClick={() => {
                             addNewRestaurant(this.state);

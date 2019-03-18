@@ -38,7 +38,9 @@ class AddRestaurantButton extends Component {
                 <Button
                     onClick={this.handleOpen}
                     className={classes.root}
-                    variant="contained">
+                    variant="contained"
+                    color="primary">
+                    
                     Add new restaurant
                 </Button>
 

@@ -1,13 +1,14 @@
 .flex-container {
     display: flex;
-    flex-direction: row;
+    align-items: flex-start;
+    height: 90vh;
+    overflow: auto;
 }
 
 .restaurantList {
     width: 15%;
-    height: 100%;
+  
     box-shadow:5px 10px 8px grey;
-    border: 1px solid #4440B9;
     float: left;
     border-radius: 3;
     margin: 10px;
@@ -16,6 +17,7 @@
 
 .orderDisplay {
     float: left;
+    flex: 0 0 auto;
     margin: 10px;
 }
 

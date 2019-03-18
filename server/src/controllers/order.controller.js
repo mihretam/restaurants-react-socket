@@ -1,5 +1,6 @@
-var {OrderList} = require('./../models/orderList');
-var {Restaurant} = require('./../models/restaurant');
+const { OrderList } = require('./../models/orderList');
+const { Restaurant } = require('./../models/restaurant');
+
 import User from '../models/user';
 const _ = require('lodash');
 
@@ -18,6 +19,12 @@ export async function addOrderList(req, res, next) {
             next();
         }).catch( (err) => res.status(400).send(err) );
     });
+
+    orderList.save().then((savedOrderList) => {
+      res.status(200).send(savedOrderList);
+      next();
+    }).catch(err => res.status(400).send(err));
+  });
 }
 export async function deleteOrderList(req, res, next) {
     OrderList.findById(req.body.orderListId).then( (orderList) => {
@@ -62,15 +69,15 @@ export async function deleteFood(req, res, next) {
 }
 
 export async function deleteAllFood(req, res, next) {
-    const id = req.body.orderListId;
-    OrderList.findById(id).then( (orderList) => {
-        if(!orderList) {
-            res.status(404).send( {message: 'OrderList not found'});
-        }
-        orderList.deleteAllFood();
-        res.status(200).send('Deleted');
-        next();
-    }).catch( (err) => res.status(400).send(err) );
+  const id = req.body.orderListId;
+  OrderList.findById(id).then((orderList) => {
+    if (!orderList) {
+      res.status(404).send({ message: 'OrderList not found' });
+    }
+    orderList.deleteAllFood();
+    res.status(200).send('Deleted');
+    next();
+  }).catch(err => res.status(400).send(err));
 }
 
 export async function getOrderListsByDate(req, res, next) {
@@ -97,10 +104,12 @@ export async function getOrderListsByDate(req, res, next) {
   
 //export async function getAllOrderLists(req, res, next) {
 
-    //     OrderList.find({}).then( (orderLists) => {
-    //         res.status(200).send(orderLists);
-    //         next();
-    //     }).catch( (err) => res.status(400).send(err));
-    
-    // }
-    
+// export async function getAllOrderLists(req, res, next) {
+
+//     OrderList.find({}).then( (orderLists) => {
+//         res.status(200).send(orderLists);
+//         next();
+//     }).catch( (err) => res.status(400).send(err));
+
+// }
+
